@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// Internal Version 1.1
+// Internal Version 1.2
 
 import 'dart:async';
 import 'dart:io';
@@ -150,7 +150,7 @@ class ImageCropper {
   /// on Android, so it can be lost later, you are responsible for storing it somewhere
   /// permanent (if needed).
   ///
-  static Future<CropInfo> cropImageWithCoordinates2({
+  static Future<CropInfo> cropImageWithCoordinates({
     String sourcePath='',
     int maxWidth=0,
     int maxHeight=0,
