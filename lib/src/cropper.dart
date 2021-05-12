@@ -149,9 +149,9 @@ class ImageCropper {
   /// permanent (if needed).
   ///
   static Future<CropInfo> cropImageWithCoordinates({
-    String sourcePath,
-    int maxWidth,
-    int maxHeight,
+    String sourcePath='',
+    int maxWidth=0,
+    int maxHeight=0,
     CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
