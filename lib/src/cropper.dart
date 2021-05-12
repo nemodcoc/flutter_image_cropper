@@ -99,7 +99,7 @@ class ImageCropper {
     final String resultPath =
         await _channel.invokeMethod('cropImage', arguments);
 
-    if (resultPath == null) return null;
+    if (resultPath == null) return '';
 
     var splitResult = resultPath.split("|\\|");
 
@@ -189,7 +189,7 @@ class ImageCropper {
     final String resultPath =
         await _channel.invokeMethod('cropImage', arguments);
 
-    if (resultPath == null) return null;
+    if (resultPath == null) return '';
 
     var splitResult = resultPath.split("|\\|");
 
