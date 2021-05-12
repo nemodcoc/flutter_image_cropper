@@ -80,7 +80,7 @@ class ImageCropper {
   }) async {
     assert(await File(sourcePath).exists());
     assert(maxWidth==0 || maxWidth > 0);
-    assert(maxHeight== || maxHeight > 0);
+    assert(maxHeight==0 || maxHeight > 0);
     assert(compressQuality >= 0 && compressQuality <= 100);
 
     final arguments = <String, dynamic>{
@@ -150,7 +150,7 @@ class ImageCropper {
   /// on Android, so it can be lost later, you are responsible for storing it somewhere
   /// permanent (if needed).
   ///
-  static Future<CropInfo> cropImageWithCoordinates({
+  static Future<CropInfo> cropImageWithCoordinates2({
     String sourcePath='',
     int maxWidth=0,
     int maxHeight=0,
