@@ -59,9 +59,9 @@ class ImageCropper {
   /// permanent (if needed).
   ///
   static Future<File> cropImage({
-    String sourcePath,
-    int maxWidth,
-    int maxHeight,
+    String sourcePath='',
+    int maxWidth=0,
+    int maxHeight=0,
     CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
@@ -77,8 +77,8 @@ class ImageCropper {
     IOSUiSettings iosUiSettings,
   }) async {
     assert(await File(sourcePath).exists());
-    assert(maxWidth > 0);
-    assert(maxHeight > 0);
+    assert(maxWidth==0 || maxWidth > 0);
+    assert(maxHeight== || maxHeight > 0);
     assert(compressQuality >= 0 && compressQuality <= 100);
 
     final arguments = <String, dynamic>{
@@ -149,9 +149,9 @@ class ImageCropper {
   /// permanent (if needed).
   ///
   static Future<CropInfo> cropImageWithCoordinates({
-    String sourcePath,
-    int maxWidth,
-    int maxHeight,
+    String sourcePath='',
+    int maxWidth=0,
+    int maxHeight=0,
     CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
@@ -167,8 +167,8 @@ class ImageCropper {
     IOSUiSettings iosUiSettings,
   }) async {
     assert(await File(sourcePath).exists());
-    assert( maxWidth > 0);
-    assert( maxHeight > 0);
+    assert(maxWidth==0 ||  maxWidth > 0);
+    assert(maxHeight==0 || maxHeight > 0);
     assert(compressQuality >= 0 && compressQuality <= 100);
 
     final arguments = <String, dynamic>{
