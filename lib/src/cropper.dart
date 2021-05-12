@@ -77,8 +77,8 @@ class ImageCropper {
     IOSUiSettings iosUiSettings,
   }) async {
     assert(await File(sourcePath).exists());
-    assert(maxWidth == null || maxWidth > 0);
-    assert(maxHeight == null || maxHeight > 0);
+    assert(maxWidth > 0);
+    assert(maxHeight > 0);
     assert(compressQuality >= 0 && compressQuality <= 100);
 
     final arguments = <String, dynamic>{
@@ -167,8 +167,8 @@ class ImageCropper {
     IOSUiSettings iosUiSettings,
   }) async {
     assert(await File(sourcePath).exists());
-    assert(maxWidth == null || maxWidth > 0);
-    assert(maxHeight == null || maxHeight > 0);
+    assert( maxWidth > 0);
+    assert( maxHeight > 0);
     assert(compressQuality >= 0 && compressQuality <= 100);
 
     final arguments = <String, dynamic>{
