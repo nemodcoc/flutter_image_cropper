@@ -57,12 +57,13 @@ class ImageCropper {
   /// Note: The result file is saved in NSTemporaryDirectory on iOS and application Cache directory
   /// on Android, so it can be lost later, you are responsible for storing it somewhere
   /// permanent (if needed).
-  ///
-  static Future<File?> cropImage({
-    required String sourcePath,
-    int? maxWidth,
-    int? maxHeight,
-    CropAspectRatio? aspectRatio,
+  ///------------------------------------------------------------------
+  //this code returns the coordinates and angle of rotation
+    static Future<CropInfo> cropImageWithCoordinates({
+    String sourcePath,
+    int maxWidth,
+    int maxHeight,
+    CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
       CropAspectRatioPreset.square,
@@ -73,8 +74,8 @@ class ImageCropper {
     CropStyle cropStyle = CropStyle.rectangle,
     ImageCompressFormat compressFormat = ImageCompressFormat.jpg,
     int compressQuality = 90,
-    AndroidUiSettings? androidUiSettings,
-    IOSUiSettings? iosUiSettings,
+    AndroidUiSettings androidUiSettings,
+    IOSUiSettings iosUiSettings,
   }) async {
     assert(await File(sourcePath).exists());
     assert(maxWidth == null || maxWidth > 0);
@@ -85,19 +86,49 @@ class ImageCropper {
       'source_path': sourcePath,
       'max_width': maxWidth,
       'max_height': maxHeight,
-      'ratio_x': aspectRatio?.ratioX,
-      'ratio_y': aspectRatio?.ratioY,
+      'ratio_x': aspectRatio.ratioX,
+      'ratio_y': aspectRatio.ratioY,
       'aspect_ratio_presets':
           aspectRatioPresets.map<String>(aspectRatioPresetName).toList(),
       'crop_style': cropStyleName(cropStyle),
       'compress_format': compressFormatName(compressFormat),
       'compress_quality': compressQuality,
     }
-      ..addAll(androidUiSettings?.toMap() ?? {})
-      ..addAll(iosUiSettings?.toMap() ?? {});
+      ..addAll(androidUiSettings.toMap() ?? {})
+      ..addAll(iosUiSettings.toMap() ?? {});
 
-    final String? resultPath =
+    final String resultPath =
         await _channel.invokeMethod('cropImage', arguments);
-    return resultPath == null ? null : new File(resultPath);
+
+    if (resultPath == null) return null;
+
+    var splitResult = resultPath.split("|\\|");
+
+    return CropInfo(
+      path: splitResult[0],
+      x: double.parse(splitResult[1]),
+      y: double.parse(splitResult[2]),
+      width: double.parse(splitResult[3]),
+      height: double.parse(splitResult[4]),
+    );
   }
 }
+
+class CropInfo {
+  final String path;
+  final double x, y, width, height;
+
+  get minX => x;
+  get minY => y;
+
+  get maxX => x + width;
+  get maxY => y + height;
+
+  CropInfo(
+      {this.path,
+      this.x,
+      this.y,
+      this.width,
+      this.height});
+}
+
