@@ -59,9 +59,9 @@ class ImageCropper {
   /// permanent (if needed).
   ///
   static Future<File> cropImage({
-    String sourcePath='',
-    int maxWidth=0,
-    int maxHeight=0,
+    String sourcePath,
+    int maxWidth,
+    int maxHeight,
     CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
@@ -149,9 +149,9 @@ class ImageCropper {
   /// permanent (if needed).
   ///
   static Future<CropInfo> cropImageWithCoordinates({
-    String sourcePath='',
-    int maxWidth=0,
-    int maxHeight=0,
+    String sourcePath,
+    int maxWidth,
+    int maxHeight,
     CropAspectRatio aspectRatio,
     List<CropAspectRatioPreset> aspectRatioPresets = const [
       CropAspectRatioPreset.original,
