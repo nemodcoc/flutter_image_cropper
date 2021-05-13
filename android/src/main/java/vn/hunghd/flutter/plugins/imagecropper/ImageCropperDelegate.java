@@ -91,25 +91,44 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         activity.startActivityForResult(cropper.getIntent(activity), UCrop.REQUEST_CROP);
     }
 
-    @Override
-    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == UCrop.REQUEST_CROP) {
-            if (resultCode == RESULT_OK) {
-                final Uri resultUri = UCrop.getOutput(data);
-                finishWithSuccess(fileUtils.getPathFromUri(activity, resultUri));
-                return true;
-            } else if (resultCode == UCrop.RESULT_ERROR) {
-                final Throwable cropError = UCrop.getError(data);
-                finishWithError("crop_error", cropError.getLocalizedMessage(), cropError);
-                return true;
-            } else if (pendingResult != null) {
-                pendingResult.success(null);
-                clearMethodCallAndResult();
-                return true;
-            }
+   @Override
+public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == UCrop.REQUEST_CROP) {
+        if (resultCode == RESULT_OK) {
+            final Uri resultUri = UCrop.getOutput(data);
+
+            final int x = data.getIntExtra(UCrop.EXTRA_OUTPUT_OFFSET_X, -1);
+            final int y = data.getIntExtra(UCrop.EXTRA_OUTPUT_OFFSET_Y, -1);
+            final int width = UCrop.getOutputImageWidth(data);
+
+            final int height = UCrop.getOutputImageHeight(data);
+
+            final float angle=0;
+            //final float angle=   UCrop.getOutputImageAngle(data);
+   
+            finishWithSuccess(String.format(
+					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%f",
+                    fileUtils.getPathFromUri(activity, resultUri),
+                    x,
+                    y,
+                    width,
+                    height,
+                    angle
+            ));
+            
+            return true;
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+            finishWithError("crop_error", cropError.getLocalizedMessage(), cropError);
+            return true;
+        } else {
+            pendingResult.success(null);
+            clearMethodCallAndResult();
+            return true;
         }
-        return false;
     }
+    return false;
+}
 
     private void finishWithSuccess(String imagePath) {
         if (pendingResult != null) {
