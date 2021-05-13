@@ -105,16 +105,13 @@ class ImageCropper {
 
     var splitResult = resultPath.split("|\\|");
 
-    CropInfo crop_info=new CropInfo(
+    return CropInfo(
       path: splitResult[0],
       x: double.parse(splitResult[1]),
       y: double.parse(splitResult[2]),
       width: double.parse(splitResult[3]),
       height: double.parse(splitResult[4]),
     );
-    
-    
-    return crop_info; 
 
   }
 }
