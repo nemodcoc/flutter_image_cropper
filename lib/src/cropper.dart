@@ -58,7 +58,7 @@ class ImageCropper {
   /// on Android, so it can be lost later, you are responsible for storing it somewhere
   /// permanent (if needed).
   ///
-  static Future<File?> cropImage({
+  static Future<CropInfo?> CropImageWithCoordinates({
     required String sourcePath,
     int? maxWidth,
     int? maxHeight,
@@ -95,9 +95,44 @@ class ImageCropper {
     }
       ..addAll(androidUiSettings?.toMap() ?? {})
       ..addAll(iosUiSettings?.toMap() ?? {});
-
-    final String? resultPath =
+    
+    
+    
+    final String resultPath =
         await _channel.invokeMethod('cropImage', arguments);
-    return resultPath == null ? null : new File(resultPath);
+
+    if (resultPath == null) return null;
+
+    var splitResult = resultPath.split("|\\|");
+
+    CropInfo crop_info=new CropInfo(
+      path: splitResult[0],
+      x: double.parse(splitResult[1]),
+      y: double.parse(splitResult[2]),
+      width: double.parse(splitResult[3]),
+      height: double.parse(splitResult[4]),
+    );
+    
+    
+    return crop_info; 
+
   }
+}
+
+class CropInfo {
+  final String path;
+  final double x, y, width, height;
+
+  get minX => x;
+  get minY => y;
+
+  get maxX => x + width;
+  get maxY => y + height;
+
+  CropInfo(
+      {this.path,
+      this.x,
+      this.y,
+      this.width,
+      this.height});
 }
