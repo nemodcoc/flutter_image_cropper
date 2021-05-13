@@ -120,8 +120,8 @@ class ImageCropper {
 }
 
 class CropInfo {
-  final String? path;
-  final double? x, y, width, height;
+  final String path='';
+  final double x=0, y=0, width=0, height=0;
 
   get minX => x;
   get minY => y;
