@@ -127,9 +127,9 @@ class CropInfo {
   final double height=0;
 
   CropInfo(
-      {this.path,
-      this.x,
-      this.y,
-      this.width,
-      this.height});
+      {this.path='',
+      this.x=0,
+      this.y=0,
+      this.width=0,
+      this.height=0});
 }
