@@ -121,13 +121,10 @@ class ImageCropper {
 
 class CropInfo {
   final String path='';
-  final double x=0, y=0, width=0, height=0;
-
-  get minX => x;
-  get minY => y;
-
-  get maxX => x + width;
-  get maxY => y + height;
+  final double x=0;
+  final double y=0;
+  final double width=0;
+  final double height=0;
 
   CropInfo(
       {this.path,
