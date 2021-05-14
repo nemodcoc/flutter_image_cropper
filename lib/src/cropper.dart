@@ -110,7 +110,7 @@ class ImageCropper {
       y: double.parse(splitResult[2]),
       width: double.parse(splitResult[3]),
       height: double.parse(splitResult[4]),
-      angle: double.parse(splitResult[5]),
+      angle: int.parse(splitResult[5]),
     );
   }
 }
