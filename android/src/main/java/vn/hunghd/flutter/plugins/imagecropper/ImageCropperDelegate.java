@@ -103,8 +103,9 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
             final int height = UCrop.getOutputImageHeight(data);
 
-            final double angle=   UCrop.getOutputImageAngle();
-   
+          //  final double angle=   activity.getOutputImageAngle();
+    final double angle=1234;
+		
             finishWithSuccess(String.format(
 					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
                     fileUtils.getPathFromUri(activity, resultUri),
