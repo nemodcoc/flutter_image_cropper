@@ -58,75 +58,55 @@ class ImageCropper {
   /// on Android, so it can be lost later, you are responsible for storing it somewhere
   /// permanent (if needed).
   ///
-  static Future<CropInfo?> CropImageWithCoordinates({
-    required String sourcePath,
-    int? maxWidth,
-    int? maxHeight,
-    CropAspectRatio? aspectRatio,
-    List<CropAspectRatioPreset> aspectRatioPresets = const [
-      CropAspectRatioPreset.original,
-      CropAspectRatioPreset.square,
-      CropAspectRatioPreset.ratio3x2,
-      CropAspectRatioPreset.ratio4x3,
-      CropAspectRatioPreset.ratio16x9
-    ],
-    CropStyle cropStyle = CropStyle.rectangle,
-    ImageCompressFormat compressFormat = ImageCompressFormat.jpg,
-    int compressQuality = 90,
-    AndroidUiSettings? androidUiSettings,
-    IOSUiSettings? iosUiSettings,
-  }) async {
-    assert(await File(sourcePath).exists());
-    assert(maxWidth == null || maxWidth > 0);
-    assert(maxHeight == null || maxHeight > 0);
-    assert(compressQuality >= 0 && compressQuality <= 100);
 
-    final arguments = <String, dynamic>{
-      'source_path': sourcePath,
-      'max_width': maxWidth,
-      'max_height': maxHeight,
-      'ratio_x': aspectRatio?.ratioX,
-      'ratio_y': aspectRatio?.ratioY,
-      'aspect_ratio_presets':
-          aspectRatioPresets.map<String>(aspectRatioPresetName).toList(),
-      'crop_style': cropStyleName(cropStyle),
-      'compress_format': compressFormatName(compressFormat),
-      'compress_quality': compressQuality,
-    }
-      ..addAll(androidUiSettings?.toMap() ?? {})
-      ..addAll(iosUiSettings?.toMap() ?? {});
-    
-    
-    
-    final String resultPath =
-        await _channel.invokeMethod('cropImage', arguments);
+ static Future<CroppedImage> CropImageWithCoordinates({
+  @required String sourcePath,
+  double ratioX,
+  double ratioY,
+  int maxWidth,
+  int maxHeight,
+  String toolbarTitle, // for only Android
+  Color toolbarColor, // for only Android
+  bool circleShape: false,
+}) async {
+  assert(sourcePath != null);
 
-    if (resultPath == null) return null;
-
-    var splitResult = resultPath.split("|\\|");
-
-    return CropInfo(
-      path: splitResult[0],
-      x: double.parse(splitResult[1]),
-      y: double.parse(splitResult[2]),
-      width: double.parse(splitResult[3]),
-      height: double.parse(splitResult[4]),
-    );
-
+  if (maxWidth != null && maxWidth < 0) {
+    throw new ArgumentError.value(maxWidth, 'maxWidth cannot be negative');
   }
+
+  if (maxHeight != null && maxHeight < 0) {
+    throw new ArgumentError.value(maxHeight, 'maxHeight cannot be negative');
+  }
+
+  final String resultPath =
+      await _channel.invokeMethod('cropImage', <String, dynamic>{
+    'source_path': sourcePath,
+    'max_width': maxWidth,
+    'max_height': maxHeight,
+    'ratio_x': ratioX,
+    'ratio_y': ratioY,
+    'toolbar_title': toolbarTitle,
+    'toolbar_color': toolbarColor?.value,
+    'circle_shape': circleShape
+  });
+
+  if (resultPath == null) return null;
+
+  var splitResult = resultPath.split("|\\|");
+
+  return CroppedImage(
+    path: splitResult[0],
+    x: double.parse(splitResult[1]),
+    y: double.parse(splitResult[2]),
+    width: double.parse(splitResult[3]),
+    height: double.parse(splitResult[4]),
+  );
 }
 
-class CropInfo {
-  final String path='';
-  final double x=0;
-  final double y=0;
-  final double width=0;
-  final double height=0;
+class CroppedImage {
+  final String path;
+  final double x, y, width, height;
 
-  CropInfo(
-      {this.path='',
-      this.x=0,
-      this.y=0,
-      this.width=0,
-      this.height=0});
+  CroppedImage({this.path, this.x, this.y, this.width, this.height});
 }
