@@ -110,6 +110,7 @@ class ImageCropper {
       y: double.parse(splitResult[2]),
       width: double.parse(splitResult[3]),
       height: double.parse(splitResult[4]),
+      angle: double.parse(splitResult[5]),
     );
   }
 }
@@ -117,7 +118,8 @@ class ImageCropper {
 class CropInfo {
   final String path;
   final double x, y, width, height;
-
+  final int angle;
+  
   get minX => x;
   get minY => y;
 
@@ -129,5 +131,6 @@ class CropInfo {
       required this.x,
       required this.y,
       required this.width,
-      required this.height});
+      required this.height,
+      required this.angle});
 }
