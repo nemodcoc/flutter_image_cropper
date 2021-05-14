@@ -106,7 +106,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 	final double angle2=   UCrop.getOutputImageAngle(data);
 
    
-  final in angle =angle2;
+  final int angle =angle2;
 		
             finishWithSuccess(String.format(
 					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
