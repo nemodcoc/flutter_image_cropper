@@ -109,7 +109,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		int angle = (int)Math.round(angle2);
 		
-		  Log.d("___flutter_image_cropper__", "angle: " + angle);
+		  Log.i("___flutter_image_cropper__", "angle: " + angle);
 		
             finishWithSuccess(String.format(
 					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
