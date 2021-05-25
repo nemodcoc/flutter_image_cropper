@@ -107,12 +107,8 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
    
 
-		int angle = (int)Math.round(angle2);
-		
-		final String TAG = "___flutter_image_cropper__";
-		Log.v(TAG, "angle=" + angle);
+		int angle = (int)Math.round(angle2);	
 	
-		
             finishWithSuccess(String.format(
 					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
                     fileUtils.getPathFromUri(activity, resultUri),
