@@ -109,7 +109,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		int angle = (int)Math.round(angle2);
 		
-		private static final String TAG = "___flutter_image_cropper__";
+		final String TAG = "___flutter_image_cropper__";
 		Log.v(TAG, "angle=" + angle);
 	
 		
