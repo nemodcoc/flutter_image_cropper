@@ -103,7 +103,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
             final int height = UCrop.getOutputImageHeight(data);
 		
-	final double angle2=   UCrop.getOutputImageAngle3(data);
+	final double angle2=   UCrop.getOutputImageAngle4(data);
 
    
 
