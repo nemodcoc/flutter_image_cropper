@@ -20,7 +20,6 @@ rootProject.allprojects {
         maven { url "https://www.jitpack.io" }
     }
 }
-
 apply plugin: 'com.android.library'
 
 android {
