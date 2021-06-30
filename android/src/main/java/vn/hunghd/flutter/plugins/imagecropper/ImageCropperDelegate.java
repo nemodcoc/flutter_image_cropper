@@ -1,3 +1,4 @@
+// _________________________ VERSION: 4.0.0 _______________________________
 package vn.hunghd.flutter.plugins.imagecropper;
 
 import android.app.Activity;
@@ -110,7 +111,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 		int angle = (int)Math.round(fAngle);	
 	
             finishWithSuccess(String.format(
-					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
+					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%i",
                     fileUtils.getPathFromUri(activity, resultUri),
                     x,
                     y,
