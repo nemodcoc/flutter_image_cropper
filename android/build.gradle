@@ -33,6 +33,6 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.github.PyGitPyHub:uCrop:4.0.0'
+        implementation 'com.github.PyGitPyHub:uCrop:tracking_angle-SNAPSHOT'
     }
 }
