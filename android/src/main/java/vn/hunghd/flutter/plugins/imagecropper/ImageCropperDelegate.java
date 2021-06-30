@@ -111,7 +111,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 		int angle = (int)Math.round(fAngle);	
 	
             finishWithSuccess(String.format(
-					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%i",
+					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
                     fileUtils.getPathFromUri(activity, resultUri),
                     x,
                     y,
