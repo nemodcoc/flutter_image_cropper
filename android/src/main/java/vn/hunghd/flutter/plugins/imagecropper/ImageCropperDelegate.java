@@ -103,11 +103,11 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
 
             final int height = UCrop.getOutputImageHeight(data);
 		
-	final double angle2=   UCrop.getOutputImageAngle4(data);
+	final double fAngle=   UCrop.getOutputImageAngle(data);
 
    
 
-		int angle = (int)Math.round(angle2);	
+		int angle = (int)Math.round(fAngle);	
 	
             finishWithSuccess(String.format(
 					"%s|\\|%d|\\|%d|\\|%d|\\|%d|\\|%d",
