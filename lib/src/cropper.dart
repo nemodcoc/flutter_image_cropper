@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-//_______________________ VERSION 4.0.0 _____________________________--
+//_______________________ VERSION 4.0.1 _____________________________--
 
 import 'dart:async';
 import 'dart:io';
@@ -112,7 +112,7 @@ class ImageCropper {
       y: double.parse(splitResult[2]),
       width: double.parse(splitResult[3]),
       height: double.parse(splitResult[4]),
-      angle: int.parse(splitResult[5]),
+      angle: double.parse(splitResult[5]),
     );
   }
 }
@@ -120,7 +120,7 @@ class ImageCropper {
 class CropInfo {
   final String path;
   final double x, y, width, height;
-  final int angle;
+  final double angle;
   
   get minX => x;
   get minY => y;
