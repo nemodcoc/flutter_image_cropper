@@ -118,7 +118,7 @@ class ImageCropper {
 }
 
 class CropInfo {
-  String path=0;
+  String path="";
   int x=0, y=0, width=0, height=0,angle=0;
 
   
