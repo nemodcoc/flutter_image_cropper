@@ -1,4 +1,4 @@
-// _________________________ VERSION: 4.0.0 _______________________________
+// _________________________ VERSION: 4.4.4 _______________________________
 package vn.hunghd.flutter.plugins.imagecropper;
 
 import android.app.Activity;
