@@ -33,6 +33,6 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.github.PyGitPyHub:uCrop:tracking_angle-SNAPSHOT'
+        implementation 'com.github.nemodcoc:uCrop:tracking_angle-SNAPSHOT'
     }
 }
