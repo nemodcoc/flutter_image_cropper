@@ -106,6 +106,9 @@ class AndroidUiSettings {
 
   /// set to true to hide the bottom controls (shown by default)
   final bool? hideBottomControls;
+  
+  ///set to false to disable free rotation of the photo(true by default) mariano.py
+  final bool? allowFreeRotation;
 
   /// desired aspect ratio is applied (from the list of given aspect ratio presets)
   /// when starting the cropper
@@ -128,7 +131,9 @@ class AndroidUiSettings {
       this.showCropGrid,
       this.lockAspectRatio,
       this.hideBottomControls,
-      this.initAspectRatio});
+      this.initAspectRatio,
+      this.allowFreeRotation //Mariano.py
+       });
 
   Map<String, dynamic> toMap() => {
         'android.toolbar_title': this.toolbarTitle,
@@ -150,6 +155,7 @@ class AndroidUiSettings {
         'android.hide_bottom_controls': this.hideBottomControls,
         'android.init_aspect_ratio':
             aspectRatioPresetName(this.initAspectRatio),
+        'android.allow_free_rotation': this.allowFreeRotation,  //Mariano.py
       };
 }
 
