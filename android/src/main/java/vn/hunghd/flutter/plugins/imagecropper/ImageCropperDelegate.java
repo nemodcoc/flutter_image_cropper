@@ -165,6 +165,7 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         Boolean showCropGrid = call.argument("android.show_crop_grid");
         Boolean lockAspectRatio = call.argument("android.lock_aspect_ratio");
         Boolean hideBottomControls = call.argument("android.hide_bottom_controls");
+	Boolean allowFreeRotation = call.argument("android.allow_free_rotation");
 
         if (title != null) {
             options.setToolbarTitle(title);
@@ -216,6 +217,9 @@ public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         if (hideBottomControls != null) {
             options.setHideBottomControls(hideBottomControls);
         }
+	if(allowFreeRotation != null){
+	    options.setAllowFreeRotation(allowFreeRotation);
+	}
 
         return options;
     }
