@@ -33,6 +33,6 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.github.nemodcoc:uCrop:0f9db05747'
+        implementation 'com.github.nemodcoc:uCrop:tracking_angle-SNAPSHOT'
     }
 }
